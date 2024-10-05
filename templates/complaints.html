@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complaints</title>
+    <style>
+        #flash-message {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 15px;
+            background-color: #f44336;
+            color: white;
+            font-weight: bold;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="flash-message"></div>
+
+    <script>
+        // Open WebSocket connection
+        const ws = new WebSocket('ws://' + window.location.host + '/ws/complaints/');
+
+        ws.onmessage = function (event) {
+            const data = JSON.parse(event.data);
+            const flashMessage = document.getElementById('flash-message');
+
+            // Display the message
+            flashMessage.innerText = data.message;
+            flashMessage.style.display = 'block';
+
+            // Hide the message after 5 seconds
+            setTimeout(function () {
+                flashMessage.style.display = 'none';
+            }, 5000);
+        };
+    </script>
+
+</body>
+
+</html>
