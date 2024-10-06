@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from . models import *
 
 # Create your views here.
 def home(request):
@@ -6,3 +7,10 @@ def home(request):
 
 def complaints_view(request):
     return render(request, 'complaints.html')
+
+def complaints(request):
+    complaints = Complaint.objects.all().order_by('-date_submitted')
+    context = {
+        'complaints': complaints
+    }
+    return render(request, 'complaints/complaints_list.html', context)

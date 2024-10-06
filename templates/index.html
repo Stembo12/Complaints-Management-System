@@ -14,6 +14,30 @@
   <link rel="stylesheet" href="{% static 'dist/css/adminlte.min.css' %}">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
+  <style>
+    @keyframes flicker {
+      0% {
+        opacity: 1;
+      }
+  
+      50% {
+        opacity: 0.2;
+      }
+  
+      /* Reduce opacity more for a flicker effect */
+      100% {
+        opacity: 1;
+      }
+    }
+  
+    .flicker-row {
+      animation: flicker 1s linear infinite;
+      /* Adjust timing as necessary */
+      background-color: yellow;
+      /* Highlight the row with a noticeable color */
+    }
+  </style>
+
 
   {% block links %}
   {% endblock %}
@@ -71,10 +95,9 @@
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
       <!-- Brand Logo -->
-      <a href="" class="brand-link">
-        <img src="{% static 'dist/img/zrp.jpg' %}" alt="ZRP Logo" class="brand-image img-circle elevation-3"
-          style="opacity: .8">
-        <span class="brand-text font-weight-light">OK ZIMBABWE</span>
+    <a href="" class="brand-link">
+      <img src="{% static 'dist/img/ok_logo.png' %}" alt="Logo" class="brand-image elevation-3"
+        style="width: 100%; max-width: 2795px; height: auto; opacity: .8;">
       </a>
 
       <!-- Sidebar -->
