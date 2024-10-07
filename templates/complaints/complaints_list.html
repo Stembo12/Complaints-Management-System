@@ -1,0 +1,34 @@
+{% extends 'index.html' %}
+
+
+{% block content %}
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>Complainant</th>
+            <th>Complaint Type</th>
+            <th>Branch</th>
+            <th>Details</th>
+            <th>Date Submitted</th>
+            <th>Status</th>
+            <th>Assigned To</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for complaint in complaints %}
+        <tr class="{% if complaint.status|lower == 'open' %}flicker-row{% endif %}">
+            <td>{{ complaint.customer }}</td>
+            <td>{{ complaint.complaint_type }}</td>
+            <td>{{ complaint.branch }}</td>
+            <td>{{ complaint.details }}</td>
+            <td>{{ complaint.date_submitted }}</td>
+            <td>{{ complaint.status }}</td>
+            <td>{{ complaint.assigned_to }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+{% endblock %}
