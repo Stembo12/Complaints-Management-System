@@ -31,6 +31,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'daphne',
+    'channels',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -41,7 +43,18 @@ INSTALLED_APPS = [
     'users',
     'complaints',
     'phonenumber_field',
+    'crispy_forms',
+    'crispy_bootstrap4', 
+    'allauth',
 ]
+
+ASGI_APPLICATION = 'core.asgi.application'
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels.layers.InMemoryChannelLayer',
+    },
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -54,7 +67,6 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'core.urls'
-
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -72,13 +84,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'core.wsgi.application'
-
-CHANNEL_LAYERS = {
-    "default": {
-        "BACKEND": "channels.layers.InMemoryChannelLayer",  # For development (in-memory)
-    },
-}
-
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
@@ -137,3 +142,23 @@ STATICFILES_DIRS =[
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# Email settings for sending real emails
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = 'smtp.gmail.com'  # Use Gmail's SMTP server
+# EMAIL_PORT = 587  # Port number for sending emails (TLS)
+# EMAIL_USE_TLS = True  # Use TLS for security
+# EMAIL_HOST_USER = 'simbatembo6@gmail.com'  # Your Gmail address
+# EMAIL_HOST_PASSWORD = 'llja udbi elrd eouq'  # Gmail app password (not your Gmail account password)
+# DEFAULT_FROM_EMAIL = 'simbatembo6@gmail.com'
+
+LOGIN_REDIRECT_URL = 'home'
+LOGIN_URL = 'login'
+LOGOUT_REDIRECT_URL = 'login'
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = 'bootstrap4'
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+

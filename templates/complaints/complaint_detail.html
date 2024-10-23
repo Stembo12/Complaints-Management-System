@@ -21,14 +21,14 @@
                     <div class="card-body p-0">
                         <ul class="nav nav-pills flex-column">
                             <li class="nav-item active">
-                                <a href="#" class="nav-link">
+                                <a href="{% url 'complaints_list' %}" class="nav-link">
                                     <i class="fas fa-inbox"></i> Inbox
                                     <span class="badge bg-primary float-right">{{ complaints|length }}</span>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a href="#" class="nav-link">
-                                    <i class="far fa-envelope"></i> Sent
+                                    <i class="fas fa-paper-plane"></i> Sent
                                 </a>
                             </li>
                             <li class="nav-item">
@@ -133,7 +133,7 @@
                             <button type="button" class="btn btn-default"><i class="fas fa-reply"></i> Reply</button>
                             <button type="button" class="btn btn-default"><i class="fas fa-share"></i> Forward</button>
                         </div>
-                        <a class="btn btn-outline-primary"><i class="far fa-trash-plus"></i> Action</a>
+                        <a href="{% url 'assign' complaint.pk %}" class="btn btn-outline-primary"><i class="far fa-trash-plus"></i> Action</a>
                         <button type="button" class="btn btn-default"><i class="fas fa-print"></i> Print</button>
                     </div>
                     <!-- /.card-footer -->

@@ -6,5 +6,5 @@ class ComplaintsConfig(AppConfig):
     name = 'complaints'
     
 def ready(self):
-    import complaints.signals
+    from . import signals
 

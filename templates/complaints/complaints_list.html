@@ -1,9 +1,13 @@
-{% extends "index.html" %}
+{% extends "home_page.html" %}
 {% load static %}
 
 
 {% block links %}
-
+<link rel="stylesheet" href="{% static 'dist/css/googleFonts.css' %}">
+<link rel="stylesheet" href="{% static 'plugins/fontawesome-free/css/all.min.css' %}">
+<link rel="stylesheet" href="{% static 'dist/css/adminlte.min.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 {% endblock links %}
 
 {% block content %}
@@ -25,14 +29,14 @@
 				<div class="card-body p-0">
 					<ul class="nav nav-pills flex-column">
 						<li class="nav-item active">
-							<a href="#" class="nav-link">
+							<a href="{% url 'complaints_list' %}" class="nav-link">
 								<i class="fas fa-inbox"></i> Inbox
 								<span class="badge bg-primary float-right">{{ complaints|length }}</span>
 							</a>
 						</li>
 						<li class="nav-item">
 							<a href="#" class="nav-link">
-								<i class="far fa-envelope"></i> Sent
+								<i class="fas fa-paper-plane"></i> Sent
 							</a>
 						</li>
 						<li class="nav-item">
@@ -131,87 +135,120 @@
 						<button type="button" class="btn btn-default btn-sm">
 							<i class="fas fa-sync-alt"></i>
 						</button>
-					
-								</div>
-								<div class="table-responsive mailbox-messages">
-									<table class="table table-hover table-striped">
-										<tbody>
-											{% for complaint in complaints %}
-									<tr>
-										<td>
-											<div class="icheck-primary">
-												<input type="checkbox" value="" id="check1">
-												<label for="check1"></label>
+					</div>
+					<div class="table-responsive mailbox-messages">
+						<table class="table table-hover table-striped">
+							<tbody>
+								{% for complaint in complaints %}
+								<tr>
+									<td>
+										<div class="icheck-primary">
+											<input type="checkbox" value="" id="check{{ complaint.pk }}">
+											<label for="check{{ complaint.pk }}"></label>
 											</div>
-										</td>
-										<td class="mailbox-star"><a href="#"><i class="far fa-envelope text-warning"></i></a>
-										</td>
-										<td class="mailbox-name"><a href="{% url 'complaint_detail' complaint.pk %}">{{complaint.customer.name}}</a></td>
-										<td class="mailbox-subject"><b>{{complaint.complaint_type}}</b>
-										</td>
-										<td> {{complaint.details}} </td>
-										<td class="mailbox-date">{{ complaint.date_submitted|timesince }} ago</td>
+											</td>
+									<td class="mailbox-star"><a href="#"><i class="far fa-envelope text-warning"></i></a></td>
+									<td class="mailbox-name"><a href="{% url 'complaint_detail' complaint.pk %}">{{ complaint.customer.name }}</a></td>
+									<td class="mailbox-subject"><b>{{ complaint.complaint_type }}</b></td>
+									<td>
+										{% if complaint.details|length > 45 %}
+										{{ complaint.details|slice:45 }}...
+										{% else %}
+										{{ complaint.details }}
+										{% endif %}
+									</td>
+									<td class="mailbox-date">{{ complaint.date_submitted|timesince }} ago</td>
 									</tr>
-									{% endfor %}
-									</tbody>
-									</table>
-						<!-- /.table -->
-						</div>
-						<!-- /.mail-box-messages -->
-						</div>
-						<!-- /.card-body -->
-						<div class="card-footer p-0">
-							<div class="mailbox-controls">
-								<!-- Check all button -->
-								<button type="button" class="btn btn-default btn-sm checkbox-toggle">
-									<i class="far fa-square"></i>
-								</button>
-								<div class="btn-group">
-									<button type="button" class="btn btn-default btn-sm">
-										<i class="far fa-trash-alt"></i>
-									</button>
-									<button type="button" class="btn btn-default btn-sm">
-										<i class="fas fa-reply"></i>
-									</button>
-									<button type="button" class="btn btn-default btn-sm">
-										<i class="fas fa-share"></i>
-									</button>
-								</div>
-								<!-- /.btn-group -->
+								{% empty %}
+								<tr>
+									<td colspan="5" class="text text-center">No mail in the inbox folder</td>
+								</tr>
+								{% endfor %}
+								</tbody>
+								</table>
+					</div>
+					<!-- /.mail-box-messages -->
+					</div>
+					<!-- /.card-body -->
+					<div class="card-footer p-0">
+						<div class="mailbox-controls">
+							<!-- Check all button -->
+							<button type="button" class="btn btn-default btn-sm checkbox-toggle">
+								<i class="far fa-square"></i>
+							</button>
+							<div class="btn-group">
 								<button type="button" class="btn btn-default btn-sm">
-									<i class="fas fa-sync-alt"></i>
+									<i class="far fa-trash-alt"></i>
+								</button>
+								<button type="button" class="btn btn-default btn-sm">
+									<i class="fas fa-reply"></i>
+								</button>
+								<button type="button" class="btn btn-default btn-sm">
+									<i class="fas fa-share"></i>
 								</button>
 							</div>
+							<!-- /.btn-group -->
+							<button type="button" class="btn btn-default btn-sm">
+								<i class="fas fa-sync-alt"></i>
+							</button>
 						</div>
-						</div>
-						<!-- /.card -->
-						</div>
-						<!-- /.col -->
-						</div>
-						<!-- /.row -->
-						</section>
-						<!-- /.content -->
-						{% endblock content %}
-						
-						{% block scripts %}
-						
-						<script>
-							$(function () {
-								//Enable check and uncheck all functionality
-								$('.checkbox-toggle').click(function () {
-									var clicks = $(this).data('clicks')
-									if (clicks) {
-										//Uncheck all checkboxes
-										$('.mailbox-messages input[type=\'checkbox\']').prop('checked', false)
-										$('.checkbox-toggle .far.fa-check-square').removeClass('fa-check-square').addClass('fa-square')
-									} else {
-										//Check all checkboxes
-										$('.mailbox-messages input[type=\'checkbox\']').prop('checked', true)
-										$('.checkbox-toggle .far.fa-square').removeClass('fa-square').addClass('fa-check-square')
-									}
-									$(this).data('clicks', !clicks)
-								})
-							})
-						</script>
+					</div>
+					</div>
+					<!-- /.card -->
+					</div>
+					<!-- /.col -->
+					</div>
+					<!-- /.row -->
+					</section>
+					<!-- /.content -->
+					{% endblock content %}
+					
+					{% block scripts %}
+					<script>
+						$(function () {
+							// Existing checkbox toggle functionality
+							$('.checkbox-toggle').click(function () {
+								var clicks = $(this).data('clicks');
+								$('.mailbox-messages input[type=\'checkbox\']').prop('checked', !clicks);
+								$(this).data('clicks', !clicks);
+							});
 
-						{% endblock scripts %}
+							// WebSocket connection
+							const socket = new WebSocket('ws://127.0.0.1:8000/ws/complaints/');
+
+							socket.onopen = function (event) {
+								console.log('WebSocket connection established');
+							};
+
+							socket.onmessage = function (event) {
+								const data = JSON.parse(event.data);
+								console.log('New complaint received:', data.complaint);
+								updateComplaintList(data.complaint);
+							};
+
+							socket.onclose = function (event) {
+								console.log('WebSocket closed:', event);
+							};
+
+							function updateComplaintList(complaint) {
+								const complaintList = $('.mailbox-messages tbody');
+								const listItem = `
+					                <tr>
+					                    <td>
+					                        <div class="icheck-primary">
+					                            <input type="checkbox" value="" id="check-${complaint.pk}">
+					                            <label for="check-${complaint.pk}"></label>
+					                        </div>
+					                    </td>
+					                    <td class="mailbox-star"><a href="#"><i class="far fa-envelope text-warning"></i></a></td>
+					                    <td class="mailbox-name"><a href="">${complaint.customer.name}</a></td>
+					                    <td class="mailbox-subject"><b>${complaint.complaint_type}</b></td>
+					                    <td>${complaint.details.length > 45 ? complaint.details.slice(0, 45) + '...' : complaint.details}</td>
+					                    <td class="mailbox-date">${new Date(complaint.date_submitted).toLocaleString()}</td>
+					                </tr>
+					            `;
+								complaintList.prepend(listItem);
+							}
+						});
+						</script>
+					{% endblock scripts %}

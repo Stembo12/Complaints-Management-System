@@ -6,9 +6,16 @@ from .models import *
 
 class AssignForm(forms.ModelForm):
     class Meta:
+        model = Assign
+        fields = ['staff']
+
+class CustomerForm(forms.ModelForm):
+    class Meta:
+        model = Customer
+        fields = '__all__'
+
+class MessageForm(forms.ModelForm):
+    class Meta:
         model = Complaint
-        fields = ['assigned_to']
+        fields = ['complaint_type', 'details', 'branch']
         
-        labels = {
-            'assigned_to': 'Assign'
-        }

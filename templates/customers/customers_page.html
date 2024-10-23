@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OK Zimbabwe Complaints</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f9f9f9;
+        }
+
+        .container {
+            width: 80%;
+            margin: 0 auto;
+        }
+
+        header {
+            background-color: #f44336;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        .logo {
+            max-width: 150px;
+            margin-bottom: 10px;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+        }
+
+        main {
+            margin-top: 30px;
+        }
+
+        h2 {
+            font-size: 2rem;
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        form {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        textarea {
+            resize: vertical;
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            background-color: #f44336;
+            color: white;
+            padding: 10px;
+            margin-top: 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #d32f2f;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            margin-top: 30px;
+        }
+
+        footer p {
+            margin: 5px 0;
+        }
+
+        footer a {
+            color: #f44336;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <img src="ok_zimbabwe_logo.png" alt="OK Zimbabwe Logo" class="logo">
+            <h1>We Value Your Feedback</h1>
+            <p>Let us know how we can improve your experience at OK Zimbabwe Supermarkets.</p>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <h2>Submit Your Complaint</h2>
+            <form action="/submit_complaint" method="POST" enctype="multipart/form-data">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" name="phone" required>
+
+                <label for="branch">Branch Visited</label>
+                <select id="branch" name="branch" required>
+                    <option value="Avondale">Avondale</option>
+                    <option value="Chitungwiza">Chitungwiza</option>
+                    <option value="Eastlea">Eastlea</option>
+                    <!-- Add more branches here -->
+                </select>
+
+                <label for="complaint">Complaint Details</label>
+                <textarea id="complaint" name="complaint" rows="5" placeholder="Please describe your issue..."
+                    required></textarea>
+
+                <label for="evidence">Upload Supporting Document (Optional)</label>
+                <input type="file" id="evidence" name="evidence">
+
+                <button type="submit">Submit Complaint</button>
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>Need immediate assistance? Contact us at <strong>customer.support@okzimbabwe.co.zw</strong> or call
+                <strong>+263 4 123 4567</strong>.
+            </p>
+            <p>Follow us on:
+                <a href="#">Facebook</a> |
+                <a href="#">Twitter</a> |
+                <a href="#">Instagram</a>
+            </p>
+            <p>&copy; 2024 OK Zimbabwe Supermarkets. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+
+</html>

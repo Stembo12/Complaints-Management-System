@@ -1,4 +1,5 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import *
+from django.contrib import messages
 from . forms import *
 
 # Create your views here.
@@ -7,6 +8,7 @@ def branch_add(request):
         form = BranchForm(request.POST)
         if form.is_valid():
             form.save()
+            messages.success(request, 'Branch added successfully.')
             return redirect('branch_list')
     else:
         form = BranchForm()
@@ -18,17 +20,19 @@ def branch_update(request, pk):
         form = BranchForm(request.POST, instance=branch)
         if form.is_valid():
             form.save()
+            messages.success(request, 'Branch updated successfully.')
             return redirect('branch_list')
     else:
-        form = BranchForm(request.POST, instance=branch)
+        form = BranchForm(instance=branch)
     return render(request, 'branches/branch_form.html', {'form': form}) 
 
 def branch_delete(request, pk):
     branch = get_object_or_404(Branch, id=pk)
     if request.method == 'POST':
         branch.delete()
+        messages.success(request, 'Branch deleted successfully.')
         return redirect('branch_list')
-    return render(request, 'delete_record.html', {'form': form}) 
+    return render(request, 'confirm_delete.html', {'branch': branch}) 
         
 
 def branch_list(request):

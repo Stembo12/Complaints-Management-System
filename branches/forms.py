@@ -8,3 +8,9 @@ class BranchForm(forms.ModelForm):
     class Meta:
         model = Branch
         fields = '__all__'
+        
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-group'}),
+            'city': forms.TextInput(attrs={'class': 'form-group'}),
+            'address': forms.Textarea(attrs={'class': 'form-group', 'rows': 4}),
+        }

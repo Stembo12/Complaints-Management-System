@@ -1,0 +1,27 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-8 offset-lg-2 col-xl-6 offset-xl-3">
+        <div class="card card shadow-lg">
+            <form method="POST">
+                <div class="card-header text-center" style="background-color: red;">
+                    <h4 class="header-title" style="color: white;">
+                        Confirm Delete
+                    </h4>
+                </div>
+                <div class="card-body">
+                    {% csrf_token %}
+                    <div class="form-group text-center">
+                        Are you sure you want to delete the record?
+                    </div>
+                </div>
+                <div class="card-footer d-flex justify-content-between">
+                    <button type="submit" class="btn btn-outline-danger">Yes, Delete</button>
+                    <a onclick="window.history.back()" class="btn btn-outline-secondary ml-auto">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock content %}
