@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="{% static 'plugins/fontawesome-free/css/all.min.css' %}">
   <link rel="stylesheet" href="{% static 'dist/css/adminlte.min.css' %}">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 
   <style>
     @keyframes flicker {
@@ -33,7 +34,7 @@
     .flicker-row {
       animation: flicker 1s linear infinite;
       /* Adjust timing as necessary */
-      background-color: yellow;
+      background-color: pink;
       /* Highlight the row with a noticeable color */
     }
   </style>
@@ -141,7 +142,7 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="" class="nav-link">
+                  <a href="{% url 'branch_list' %}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Branches</p>
                   </a>
@@ -160,7 +161,7 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="" class="nav-link">
+                  <a href="{% url 'complaints_list' %}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Manage Complaints</p>
                   </a>
@@ -266,6 +267,7 @@
   <script src="{% static 'plugins/select2/js/select2.full.min.js' %}"></script>
   <!-- Toastr JS -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+  <script src="{% static 'dist/js/demo.js' %}"></script>
 
   <script type="text/javascript">
     var messages = [];

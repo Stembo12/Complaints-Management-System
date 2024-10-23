@@ -15,15 +15,15 @@ class Customer(models.Model):
    
 class Complaint(models.Model):
     complaint_type = [
-        ('product_issue', 'Product Issue'),
-        ('billing_issue', 'Billing Issue'),
-        ('staff_behavior', 'Staff Behavior'),   
+        ('Product Issue', 'Product Issue'),
+        ('Billing Issue', 'Billing Issue'),
+        ('Staff Behavior', 'Staff Behavior'),   
     ]
     status = [
-        ('open', 'Open'),
-        ('in_progress', 'In Progress'),
-        ('resolved', 'Resolved'),   
-        ('closed', 'Closed'),   
+        ('Pending', 'Pending'),
+        ('Received', 'Received'),
+        ('In Progress', 'In Progress'),
+        ('Resolved', 'Resolved'),      
     ]
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
     complaint_type = models.CharField(max_length=50, choices=complaint_type)
@@ -33,3 +33,4 @@ class Complaint(models.Model):
     date_submitted = models.DateTimeField(auto_now=False, auto_now_add=True)
     date_updated = models.DateTimeField(auto_now=True, auto_now_add=False)
     assigned_to = models.ForeignKey("users.Staff", on_delete=models.CASCADE, null=True, blank=True)
+    

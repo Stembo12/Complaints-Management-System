@@ -33,4 +33,4 @@ def branch_delete(request, pk):
 
 def branch_list(request):
     branches = Branch.objects.all()
-    return render(request, 'branches/branch_form.html', {'branches': branches}) 
+    return render(request, 'branches/branch_list.html', {'branches': branches}) 

@@ -1,5 +1,8 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import *
+from django.urls import *
 from . models import *
+from . forms import *
+from django.core.paginator import Paginator
 
 # Create your views here.
 def home(request):
@@ -10,7 +13,15 @@ def complaints_view(request):
 
 def complaints(request):
     complaints = Complaint.objects.all().order_by('-date_submitted')
-    context = {
+    return render(request, 'complaints/complaints_list.html', {
         'complaints': complaints
+    })
+
+def complaint_detail(request, pk):
+    complaint = get_object_or_404(Complaint, id=pk)
+    complaints = Complaint.objects.all()
+    context = {
+        'complaint': complaint,
+        'complaints': complaints,
     }
-    return render(request, 'complaints/complaints_list.html', context)
+    return render(request, 'complaints/complaint_detail.html', context)
